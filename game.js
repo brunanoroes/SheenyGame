@@ -46,8 +46,18 @@ new Vue({
       this.jogo.totalJogadores =
         Number(localStorage.getItem("totalJogadores"));
 
-      const res = await fetch("words.json");
-      this.palavras = await res.json();
+      const palavrasCustom =
+        JSON.parse(localStorage.getItem("palavrasCustom"));
+
+      if (palavrasCustom && palavrasCustom.length) {
+        this.palavras = palavrasCustom.map(p => ({
+          palavra: p
+        }));
+      } else {
+        const res = await fetch("words.json");
+        this.palavras = await res.json();
+      }
+
 
       // inicia pontuação
       for (let i = 1; i <= this.jogo.totalJogadores; i++) {

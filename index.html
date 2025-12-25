@@ -39,6 +39,41 @@
     v-model.number="tempoRodada"
   />
 
+  <label>Palavras do jogo</label>
+
+<div class="radio-group">
+  <label>
+    <input
+      type="radio"
+      value="padrao"
+      v-model="modoPalavras"
+    />
+    Usar palavras do jogo
+  </label>
+
+  <label>
+    <input
+        type="radio"
+        value="custom"
+        v-model="modoPalavras"
+      />
+      Adicionar minha lista
+    </label>
+  </div>
+
+  <div v-if="modoPalavras === 'custom'">
+    <label>
+      Lista de palavras
+      <small>(separe por ; )</small>
+    </label>
+    <textarea
+      v-model="listaCustom"
+      rows="4"
+      placeholder="Ex: Futebol; Praia; Escola; Cinema"
+    ></textarea>
+  </div>
+
+
 
   <button @click="iniciar">Iniciar jogo</button>
 </div>
@@ -49,8 +84,10 @@ new Vue({
   el: "#app",
   data: {
     totalJogadores: 3,
-    tempoRodada: 5, // padrão
-    nomes: {}
+    tempoRodada: 5,
+    nomes: {},
+    modoPalavras: "padrao",
+    listaCustom: ""
   },
   methods: {
     iniciar() {
@@ -71,12 +108,38 @@ new Vue({
         }
       }
 
+      // palavras customizadas
+      if (this.modoPalavras === "custom") {
+        if (!this.listaCustom.trim()) {
+          alert("Digite pelo menos uma palavra");
+          return;
+        }
+
+        const palavras = this.listaCustom
+          .split(";")
+          .map(p => p.trim())
+          .filter(p => p.length > 0);
+
+        if (palavras.length < 2) {
+          alert("Digite pelo menos 2 palavras");
+          return;
+        }
+
+        localStorage.setItem(
+          "palavrasCustom",
+          JSON.stringify(palavras)
+        );
+      } else {
+        localStorage.removeItem("palavrasCustom");
+      }
+
       localStorage.setItem("totalJogadores", this.totalJogadores);
       localStorage.setItem("tempoRodada", this.tempoRodada);
       localStorage.setItem("nomesJogadores", JSON.stringify(this.nomes));
 
       window.location.href = "game.html";
     }
+
   }
 });
 </script>
