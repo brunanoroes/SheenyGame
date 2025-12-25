@@ -26,6 +26,14 @@
     </label>
   </div>
 
+  <label>Tempo da rodada (em minutos)</label>
+  <input
+    type="number"
+    min="1"
+    v-model.number="tempoRodada"
+  />
+
+
   <button @click="iniciar">Iniciar jogo</button>
 </div>
 
@@ -35,6 +43,7 @@ new Vue({
   el: "#app",
   data: {
     totalJogadores: 3,
+    tempoRodada: 5, // padrão
     nomes: {}
   },
   methods: {
@@ -44,7 +53,11 @@ new Vue({
         return;
       }
 
-      // valida nomes
+      if (!this.tempoRodada || this.tempoRodada < 1) {
+        alert("Defina um tempo válido para a rodada");
+        return;
+      }
+
       for (let i = 1; i <= this.totalJogadores; i++) {
         if (!this.nomes[i] || !this.nomes[i].trim()) {
           alert(`Digite o nome do Jogador ${i}`);
@@ -53,6 +66,7 @@ new Vue({
       }
 
       localStorage.setItem("totalJogadores", this.totalJogadores);
+      localStorage.setItem("tempoRodada", this.tempoRodada);
       localStorage.setItem("nomesJogadores", JSON.stringify(this.nomes));
 
       window.location.href = "game.html";
@@ -60,6 +74,7 @@ new Vue({
   }
 });
 </script>
+
 
 </body>
 </html>

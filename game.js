@@ -6,9 +6,7 @@ new Vue({
     palavras: [],
     palavraAtual: "",
 
-    tempo: 120,
     intervalo: null,
-
     maxRodadas: 10,
 
     jogo: {
@@ -19,20 +17,19 @@ new Vue({
       rodada: 1,
       pontos: {}
     },
-    nomesJogadores: {}
-  },
 
-  computed: {
-    timerFormatado() {
-      const m = String(Math.floor(this.tempo / 60)).padStart(2, "0");
-      const s = String(this.tempo % 60).padStart(2, "0");
-      return `${m}:${s}`;
-    }
+    nomesJogadores: {},
+    tempoRodada: 5,
+    tempoRestante: 0
   },
 
   async created() {
     this.nomesJogadores =
       JSON.parse(localStorage.getItem("nomesJogadores")) || {};
+
+    this.tempoRodada =
+      Number(localStorage.getItem("tempoRodada")) || 2;
+
     await this.iniciarJogo();
   },
 
@@ -41,15 +38,13 @@ new Vue({
        INICIALIZAÇÃO
     ========================== */
     async iniciarJogo() {
-      const totalJogadores = Number(localStorage.getItem("totalJogadores"));
+      this.jogo.totalJogadores =
+        Number(localStorage.getItem("totalJogadores"));
 
       const res = await fetch("words.json");
       this.palavras = await res.json();
 
-      this.jogo.totalJogadores = totalJogadores;
-
-      // inicializa placar
-      for (let i = 1; i <= totalJogadores; i++) {
+      for (let i = 1; i <= this.jogo.totalJogadores; i++) {
         this.$set(this.jogo.pontos, i, 0);
       }
 
@@ -57,23 +52,18 @@ new Vue({
     },
 
     /* ==========================
-       SORTEIO DE RODADA
+       RODADA
     ========================== */
     sortearRodada() {
-      // palavra aleatória
       this.jogo.palavra =
         this.palavras[Math.floor(Math.random() * this.palavras.length)];
 
-      // impostor aleatório
       this.jogo.impostor =
         Math.floor(Math.random() * this.jogo.totalJogadores) + 1;
 
       this.jogo.jogadorAtual = 1;
     },
 
-    /* ==========================
-       TELAS
-    ========================== */
     verPalavra() {
       this.palavraAtual =
         this.jogo.jogadorAtual === this.jogo.impostor
@@ -87,7 +77,7 @@ new Vue({
       this.jogo.jogadorAtual++;
 
       if (this.jogo.jogadorAtual > this.jogo.totalJogadores) {
-        this.iniciarRodada();
+        this.iniciarTimer();
       } else {
         this.tela = "passe";
       }
@@ -96,13 +86,14 @@ new Vue({
     /* ==========================
        TIMER
     ========================== */
-    iniciarRodada() {
+    iniciarTimer() {
       this.tela = "timer";
-      this.tempo = 120;
+      this.tempoRestante = this.tempoRodada * 60;
 
       this.intervalo = setInterval(() => {
-        this.tempo--;
-        if (this.tempo <= 0) {
+        this.tempoRestante--;
+
+        if (this.tempoRestante <= 0) {
           clearInterval(this.intervalo);
         }
       }, 1000);
@@ -130,12 +121,10 @@ new Vue({
     },
 
     /* ==========================
-       NOVA RODADA / FIM
+       NOVA RODADA
     ========================== */
     novaRodada(primeira = false) {
-      if (!primeira) {
-        this.jogo.rodada++;
-      }
+      if (!primeira) this.jogo.rodada++;
 
       if (this.jogo.rodada > this.maxRodadas) {
         this.tela = "final";
@@ -146,13 +135,9 @@ new Vue({
       this.tela = "passe";
     },
 
-    /* ==========================
-       REINICIAR
-    ========================== */
     reiniciarJogo() {
       localStorage.clear();
       window.location.href = "index.html";
     }
   }
 });
-

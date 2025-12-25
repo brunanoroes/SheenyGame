@@ -28,7 +28,9 @@
 
   <!-- TELA TIMER -->
   <div v-if="tela === 'timer'">
-    <h1>{{ timerFormatado }}</h1>
+    <p>⏱️ {{ Math.floor(tempoRestante / 60) }}:
+    {{ (tempoRestante % 60).toString().padStart(2, '0') }}</p>
+
 
     <div class="placar">
       <div v-for="(pontos, jogador) in jogo.pontos" :key="jogador">
