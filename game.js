@@ -1,26 +1,31 @@
 new Vue({
   el: "#game",
 
-  data: {
-    tela: "passe", // passe | palavra | timer | final
-    palavras: [],
-    palavraAtual: "",
+  data() {
+    return {
+      // telas: passe | palavra | timer | final
+      tela: "passe",
 
-    intervalo: null,
-    maxRodadas: 10,
+      palavras: [],
+      palavraAtual: "",
 
-    jogo: {
-      totalJogadores: 0,
-      impostor: 0,
-      palavra: null,
-      jogadorAtual: 1,
-      rodada: 1,
-      pontos: {}
-    },
+      intervalo: null,
+      maxRodadas: 10,
 
-    nomesJogadores: {},
-    tempoRodada: 5,
-    tempoRestante: 0
+      tempoRodada: 2, // minutos
+      tempoRestante: 0,
+
+      nomesJogadores: {},
+
+      jogo: {
+        totalJogadores: 0,
+        impostor: 0,
+        palavra: null,
+        jogadorAtual: 1,
+        rodada: 1,
+        pontos: {}
+      }
+    };
   },
 
   async created() {
@@ -35,7 +40,7 @@ new Vue({
 
   methods: {
     /* ==========================
-       INICIALIZAÇÃO
+       INÍCIO DO JOGO
     ========================== */
     async iniciarJogo() {
       this.jogo.totalJogadores =
@@ -44,6 +49,7 @@ new Vue({
       const res = await fetch("words.json");
       this.palavras = await res.json();
 
+      // inicia pontuação
       for (let i = 1; i <= this.jogo.totalJogadores; i++) {
         this.$set(this.jogo.pontos, i, 0);
       }
@@ -55,20 +61,25 @@ new Vue({
        RODADA
     ========================== */
     sortearRodada() {
+      // sorteia palavra
       this.jogo.palavra =
         this.palavras[Math.floor(Math.random() * this.palavras.length)];
 
+      // sorteia impostor
       this.jogo.impostor =
         Math.floor(Math.random() * this.jogo.totalJogadores) + 1;
 
+      // começa do jogador 1
       this.jogo.jogadorAtual = 1;
     },
 
     verPalavra() {
-      this.palavraAtual =
-        this.jogo.jogadorAtual === this.jogo.impostor
-          ? this.jogo.palavra.palavraImpostor
-          : this.jogo.palavra.palavra;
+      // impostor vê apenas "IMPOSTOR"
+      if (this.jogo.jogadorAtual === this.jogo.impostor) {
+        this.palavraAtual = "IMPOSTOR";
+      } else {
+        this.palavraAtual = this.jogo.palavra.palavra;
+      }
 
       this.tela = "palavra";
     },
@@ -100,11 +111,13 @@ new Vue({
     },
 
     /* ==========================
-       RESULTADOS
+       RESULTADO DA RODADA
     ========================== */
     impostorGanhou() {
       clearInterval(this.intervalo);
+
       this.jogo.pontos[this.jogo.impostor] += 2;
+
       this.novaRodada();
     },
 
@@ -124,7 +137,9 @@ new Vue({
        NOVA RODADA
     ========================== */
     novaRodada(primeira = false) {
-      if (!primeira) this.jogo.rodada++;
+      if (!primeira) {
+        this.jogo.rodada++;
+      }
 
       if (this.jogo.rodada > this.maxRodadas) {
         this.tela = "final";
@@ -135,6 +150,9 @@ new Vue({
       this.tela = "passe";
     },
 
+    /* ==========================
+       RESET
+    ========================== */
     reiniciarJogo() {
       localStorage.clear();
       window.location.href = "index.html";
