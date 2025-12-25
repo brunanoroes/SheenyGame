@@ -1,35 +1,67 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>Partida</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Sheeny - Jogo</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 </head>
-<body>
-  <div id="game" class="container">
-  <header class="header">
-    <h1>Sheeny</h1>
-    <span class="rodada">Rodada {{ rodada }}/10</span>
-  </header>
+<body class="theme">
 
-  <section class="timer-box">
-    <span class="timer">{{ tempoFormatado }}</span>
-  </section>
+<div id="game" class="card">
 
-  <section class="card-palavra">
-    <h3>Sua palavra</h3>
-    <p class="palavra">{{ palavra }}</p>
-  </section>
+  <h2 v-if="tela !== 'timer'">
+    {{ nomesJogadores[jogo.jogadorAtual] }}
+  </h2>
 
-  <section class="acoes">
-    <button class="btn green" @click="resultado(true)">Ganhei</button>
-    <button class="btn red" @click="resultado(false)">Perdi</button>
-  </section>
+  <!-- TELA PASSE -->
+  <div v-if="tela === 'passe'">
+    <p>Passe o celular</p>
+    <button @click="verPalavra">Ver minha palavra</button>
+  </div>
+
+  <!-- TELA PALAVRA -->
+  <div v-if="tela === 'palavra'">
+    <h3>{{ palavraAtual }}</h3>
+    <button @click="proximoJogador">OK, próximo</button>
+  </div>
+
+  <!-- TELA TIMER -->
+  <div v-if="tela === 'timer'">
+    <h1>{{ timerFormatado }}</h1>
+
+    <div class="placar">
+      <div v-for="(pontos, jogador) in jogo.pontos" :key="jogador">
+        {{ nomesJogadores[jogador] }}: {{ pontos }} pontos
+      </div>
+    </div>
+
+    <button class="success" @click="impostorGanhou">Impostor ganhou</button>
+    <button @click="tripulacaoGanhou">Tripulação ganhou</button>
+  </div>
+
+  <!-- TELA FINAL -->
+<div v-if="tela === 'final'">
+  <h2>Fim de jogo 🎉</h2>
+
+  <div class="placar">
+    <div v-for="(pontos, jogador) in jogo.pontos" :key="jogador">
+      Jogador {{ jogador }}: {{ pontos }} pontos
+    </div>
+  </div>
+
+  <p class="subtitle">
+    Quem ganhou? Descubram juntos 😄
+  </p>
+
+  <button class="secondary" @click="reiniciarJogo">
+    Jogar novamente
+  </button>
 </div>
 
 
-  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-  <script src="game.js"></script>
+</div>
+<script src="game.js"></script>
+
 </body>
 </html>

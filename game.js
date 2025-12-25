@@ -1,99 +1,158 @@
 new Vue({
   el: "#game",
+
   data: {
-    rodada: 1,
-    palavra: "",
-    numeroJogador: null,
-    tempoRestante: 120, // 2 minutos
-    timerInterval: null
-  },
+    tela: "passe", // passe | palavra | timer | final
+    palavras: [],
+    palavraAtual: "",
 
-  async created() {
-    this.numeroJogador = Number(localStorage.getItem("numeroJogador"));
+    tempo: 120,
+    intervalo: null,
 
-    let jogo = JSON.parse(localStorage.getItem("jogo"));
-    this.rodada = jogo.rodada;
+    maxRodadas: 10,
 
-    if (!jogo.palavra || !jogo.impostor) {
-      await this.iniciarRodada();
-      jogo = JSON.parse(localStorage.getItem("jogo"));
-    }
-
-    this.palavra =
-      jogo.impostor === this.numeroJogador
-        ? jogo.palavra.palavraImpostor
-        : jogo.palavra.palavra;
-
-    this.iniciarTimer();
+    jogo: {
+      totalJogadores: 0,
+      impostor: 0,
+      palavra: null,
+      jogadorAtual: 1,
+      rodada: 1,
+      pontos: {}
+    },
+    nomesJogadores: {}
   },
 
   computed: {
-    tempoFormatado() {
-      const min = String(Math.floor(this.tempoRestante / 60)).padStart(2, "0");
-      const sec = String(this.tempoRestante % 60).padStart(2, "0");
-      return `${min}:${sec}`;
+    timerFormatado() {
+      const m = String(Math.floor(this.tempo / 60)).padStart(2, "0");
+      const s = String(this.tempo % 60).padStart(2, "0");
+      return `${m}:${s}`;
     }
   },
 
+  async created() {
+    this.nomesJogadores =
+      JSON.parse(localStorage.getItem("nomesJogadores")) || {};
+    await this.iniciarJogo();
+  },
+
   methods: {
-    iniciarTimer() {
-      this.timerInterval = setInterval(() => {
-        if (this.tempoRestante > 0) {
-          this.tempoRestante--;
-        } else {
-          clearInterval(this.timerInterval);
-          alert("⏰ Tempo esgotado!");
+    /* ==========================
+       INICIALIZAÇÃO
+    ========================== */
+    async iniciarJogo() {
+      const totalJogadores = Number(localStorage.getItem("totalJogadores"));
+
+      const res = await fetch("words.json");
+      this.palavras = await res.json();
+
+      this.jogo.totalJogadores = totalJogadores;
+
+      // inicializa placar
+      for (let i = 1; i <= totalJogadores; i++) {
+        this.$set(this.jogo.pontos, i, 0);
+      }
+
+      this.novaRodada(true);
+    },
+
+    /* ==========================
+       SORTEIO DE RODADA
+    ========================== */
+    sortearRodada() {
+      // palavra aleatória
+      this.jogo.palavra =
+        this.palavras[Math.floor(Math.random() * this.palavras.length)];
+
+      // impostor aleatório
+      this.jogo.impostor =
+        Math.floor(Math.random() * this.jogo.totalJogadores) + 1;
+
+      this.jogo.jogadorAtual = 1;
+    },
+
+    /* ==========================
+       TELAS
+    ========================== */
+    verPalavra() {
+      this.palavraAtual =
+        this.jogo.jogadorAtual === this.jogo.impostor
+          ? this.jogo.palavra.palavraImpostor
+          : this.jogo.palavra.palavra;
+
+      this.tela = "palavra";
+    },
+
+    proximoJogador() {
+      this.jogo.jogadorAtual++;
+
+      if (this.jogo.jogadorAtual > this.jogo.totalJogadores) {
+        this.iniciarRodada();
+      } else {
+        this.tela = "passe";
+      }
+    },
+
+    /* ==========================
+       TIMER
+    ========================== */
+    iniciarRodada() {
+      this.tela = "timer";
+      this.tempo = 120;
+
+      this.intervalo = setInterval(() => {
+        this.tempo--;
+        if (this.tempo <= 0) {
+          clearInterval(this.intervalo);
         }
       }, 1000);
     },
 
-    async iniciarRodada() {
-      const jogo = JSON.parse(localStorage.getItem("jogo"));
-      const totalJogadores = Number(localStorage.getItem("totalJogadores"));
-
-      const res = await fetch("words.json");
-      const palavras = await res.json();
-
-      const palavraSorteada =
-        palavras[Math.floor(Math.random() * palavras.length)];
-
-      const impostor =
-        Math.floor(Math.random() * totalJogadores) + 1;
-
-      jogo.impostor = impostor;
-      jogo.palavra = palavraSorteada;
-
-      localStorage.setItem("jogo", JSON.stringify(jogo));
+    /* ==========================
+       RESULTADOS
+    ========================== */
+    impostorGanhou() {
+      clearInterval(this.intervalo);
+      this.jogo.pontos[this.jogo.impostor] += 2;
+      this.novaRodada();
     },
 
-    resultado(ganhou) {
-      clearInterval(this.timerInterval);
+    tripulacaoGanhou() {
+      clearInterval(this.intervalo);
 
-      const jogo = JSON.parse(localStorage.getItem("jogo"));
-
-      if (!jogo.pontos[this.numeroJogador]) {
-        jogo.pontos[this.numeroJogador] = 0;
-      }
-
-      if (ganhou) {
-        if (jogo.impostor === this.numeroJogador) {
-          jogo.pontos[this.numeroJogador] += 2;
-        } else {
-          jogo.pontos[this.numeroJogador] += 1;
+      for (let i = 1; i <= this.jogo.totalJogadores; i++) {
+        if (i !== this.jogo.impostor) {
+          this.jogo.pontos[i] += 1;
         }
       }
 
-      jogo.rodada++;
-      delete jogo.impostor;
-      delete jogo.palavra;
+      this.novaRodada();
+    },
 
-      localStorage.setItem("jogo", JSON.stringify(jogo));
-
-      if (jogo.rodada > 10) {
-        alert("Fim de jogo! Veja quem ganhou presencialmente 😄");
-      } else {
-        window.location.reload();
+    /* ==========================
+       NOVA RODADA / FIM
+    ========================== */
+    novaRodada(primeira = false) {
+      if (!primeira) {
+        this.jogo.rodada++;
       }
+
+      if (this.jogo.rodada > this.maxRodadas) {
+        this.tela = "final";
+        return;
+      }
+
+      this.sortearRodada();
+      this.tela = "passe";
+    },
+
+    /* ==========================
+       REINICIAR
+    ========================== */
+    reiniciarJogo() {
+      localStorage.clear();
+      window.location.href = "index.html";
     }
   }
 });
+

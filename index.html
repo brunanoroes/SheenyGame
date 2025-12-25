@@ -1,56 +1,65 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Sheeny</title>
-
-  <!-- Fonte -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 </head>
-<body>
-  <div id="app" class="container">
+<body class="theme">
 
-    <!-- Header -->
-    <header class="header">
-      <h1>Sheeny</h1>
-      <p class="subtitle">Jogo presencial em família</p>
-    </header>
+<div id="app" class="card">
+  <h1>Sheeny</h1>
+  <p class="subtitle">Jogo presencial de dedução</p>
 
-    <!-- Card -->
-    <section class="card-palavra">
-      <h3>Configuração do jogo</h3>
+  <label>Quantidade de jogadores</label>
+  <input type="number" min="3" v-model.number="totalJogadores" />
 
-      <div class="form-group">
-        <label>Quantidade de jogadores</label>
-        <select v-model="totalJogadores">
-          <option v-for="n in 12" :value="n">{{ n }}</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>Seu número</label>
-        <select v-model="numeroJogador">
-          <option v-for="n in totalJogadores" :value="n">
-            Jogador {{ n }}
-          </option>
-        </select>
-      </div>
-
-      <button class="btn green full" @click="iniciar">
-        Entrar no jogo
-      </button>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <span>🇵🇸 Sheeny • Jogo offline</span>
-    </footer>
-
+  <div v-if="totalJogadores >= 3">
+    <label v-for="n in totalJogadores" :key="n">
+      Nome do Jogador {{ n }}
+      <input
+        type="text"
+        v-model="nomes[n]"
+        placeholder="Ex: Ana"
+      />
+    </label>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-  <script src="index.js"></script>
+  <button @click="iniciar">Iniciar jogo</button>
+</div>
+
+
+<script>
+new Vue({
+  el: "#app",
+  data: {
+    totalJogadores: 3,
+    nomes: {}
+  },
+  methods: {
+    iniciar() {
+      if (this.totalJogadores < 3) {
+        alert("Mínimo 3 jogadores");
+        return;
+      }
+
+      // valida nomes
+      for (let i = 1; i <= this.totalJogadores; i++) {
+        if (!this.nomes[i] || !this.nomes[i].trim()) {
+          alert(`Digite o nome do Jogador ${i}`);
+          return;
+        }
+      }
+
+      localStorage.setItem("totalJogadores", this.totalJogadores);
+      localStorage.setItem("nomesJogadores", JSON.stringify(this.nomes));
+
+      window.location.href = "game.html";
+    }
+  }
+});
+</script>
+
 </body>
 </html>
