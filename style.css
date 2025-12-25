@@ -1,0 +1,123 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #f4f4f4;
+  color: #111;
+}
+
+/* Container */
+.container {
+  max-width: 420px;
+  margin: auto;
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 36px;
+  color: #0a7a3b;
+  letter-spacing: 2px;
+}
+
+.rodada {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Timer */
+.timer-box {
+  background: #111;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  margin: 15px 0;
+}
+
+.timer {
+  font-size: 32px;
+  font-weight: 700;
+  color: #c0392b;
+}
+
+/* Palavra */
+.card-palavra {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 25px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.card-palavra h3 {
+  margin-top: 0;
+  font-size: 16px;
+  color: #555;
+}
+
+.palavra {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0a7a3b;
+  margin: 15px 0 0;
+}
+
+/* Ações */
+.acoes {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.btn {
+  flex: 1;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.1s ease, opacity 0.2s ease;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn.green {
+  background: #0a7a3b;
+  color: #fff;
+}
+
+.btn.red {
+  background: #c0392b;
+  color: #fff;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10,122,59,0.05),
+    rgba(0,0,0,0.05)
+  );
+  pointer-events: none;
+}

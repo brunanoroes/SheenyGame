@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Partida</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="game" class="container">
+  <header class="header">
+    <h1>Sheeny</h1>
+    <span class="rodada">Rodada {{ rodada }}/10</span>
+  </header>
+
+  <section class="timer-box">
+    <span class="timer">{{ tempoFormatado }}</span>
+  </section>
+
+  <section class="card-palavra">
+    <h3>Sua palavra</h3>
+    <p class="palavra">{{ palavra }}</p>
+  </section>
+
+  <section class="acoes">
+    <button class="btn green" @click="resultado(true)">Ganhei</button>
+    <button class="btn red" @click="resultado(false)">Perdi</button>
+  </section>
+</div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script src="game.js"></script>
+</body>
+</html>

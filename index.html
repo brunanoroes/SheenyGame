@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sheeny</title>
+
+  <!-- Fonte -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app" class="container">
+
+    <!-- Header -->
+    <header class="header">
+      <h1>Sheeny</h1>
+      <p class="subtitle">Jogo presencial em família</p>
+    </header>
+
+    <!-- Card -->
+    <section class="card-palavra">
+      <h3>Configuração do jogo</h3>
+
+      <div class="form-group">
+        <label>Quantidade de jogadores</label>
+        <select v-model="totalJogadores">
+          <option v-for="n in 12" :value="n">{{ n }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Seu número</label>
+        <select v-model="numeroJogador">
+          <option v-for="n in totalJogadores" :value="n">
+            Jogador {{ n }}
+          </option>
+        </select>
+      </div>
+
+      <button class="btn green full" @click="iniciar">
+        Entrar no jogo
+      </button>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span>🇵🇸 Sheeny • Jogo offline</span>
+    </footer>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script src="index.js"></script>
+</body>
+</html>

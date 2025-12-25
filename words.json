@@ -1,0 +1,482 @@
+[
+  {
+    "palavra": "Pizza",
+    "palavraImpostor": "Hambúrguer"
+  },
+  {
+    "palavra": "Praia",
+    "palavraImpostor": "Piscina"
+  },
+  {
+    "palavra": "Cachorro",
+    "palavraImpostor": "Gato"
+  },
+  {
+    "palavra": "Sorvete",
+    "palavraImpostor": "Açaí"
+  },
+  {
+    "palavra": "Cinema",
+    "palavraImpostor": "Teatro"
+  },
+  {
+    "palavra": "Chocolate",
+    "palavraImpostor": "Baunilha"
+  },
+  {
+    "palavra": "Escola",
+    "palavraImpostor": "Faculdade"
+  },
+  {
+    "palavra": "Futebol",
+    "palavraImpostor": "Basquete"
+  },
+  {
+    "palavra": "Carro",
+    "palavraImpostor": "Moto"
+  },
+  {
+    "palavra": "Ônibus",
+    "palavraImpostor": "Metrô"
+  },
+  {
+    "palavra": "Café",
+    "palavraImpostor": "Chá"
+  },
+  {
+    "palavra": "Livro",
+    "palavraImpostor": "Revista"
+  },
+  {
+    "palavra": "Computador",
+    "palavraImpostor": "Notebook"
+  },
+  {
+    "palavra": "Celular",
+    "palavraImpostor": "Tablet"
+  },
+  {
+    "palavra": "Relógio",
+    "palavraImpostor": "Pulseira"
+  },
+  {
+    "palavra": "Cama",
+    "palavraImpostor": "Sofá"
+  },
+  {
+    "palavra": "Travesseiro",
+    "palavraImpostor": "Cobertor"
+  },
+  {
+    "palavra": "Banho",
+    "palavraImpostor": "Piscina"
+  },
+  {
+    "palavra": "Chuva",
+    "palavraImpostor": "Neve"
+  },
+  {
+    "palavra": "Sol",
+    "palavraImpostor": "Lua"
+  },
+  {
+    "palavra": "Música",
+    "palavraImpostor": "Podcast"
+  },
+  {
+    "palavra": "Filme",
+    "palavraImpostor": "Série"
+  },
+  {
+    "palavra": "Netflix",
+    "palavraImpostor": "YouTube"
+  },
+  {
+    "palavra": "Instagram",
+    "palavraImpostor": "TikTok"
+  },
+  {
+    "palavra": "WhatsApp",
+    "palavraImpostor": "Telegram"
+  },
+  {
+    "palavra": "Email",
+    "palavraImpostor": "Carta"
+  },
+  {
+    "palavra": "Trabalho",
+    "palavraImpostor": "Férias"
+  },
+  {
+    "palavra": "Viagem",
+    "palavraImpostor": "Passeio"
+  },
+  {
+    "palavra": "Hotel",
+    "palavraImpostor": "Pousada"
+  },
+  {
+    "palavra": "Avião",
+    "palavraImpostor": "Helicóptero"
+  },
+  {
+    "palavra": "Cozinha",
+    "palavraImpostor": "Restaurante"
+  },
+  {
+    "palavra": "Garfo",
+    "palavraImpostor": "Colher"
+  },
+  {
+    "palavra": "Prato",
+    "palavraImpostor": "Tigela"
+  },
+  {
+    "palavra": "Panela",
+    "palavraImpostor": "Frigideira"
+  },
+  {
+    "palavra": "Fogão",
+    "palavraImpostor": "Forno"
+  },
+  {
+    "palavra": "Geladeira",
+    "palavraImpostor": "Freezer"
+  },
+  {
+    "palavra": "Mercado",
+    "palavraImpostor": "Feira"
+  },
+  {
+    "palavra": "Padaria",
+    "palavraImpostor": "Confeitaria"
+  },
+  {
+    "palavra": "Bolo",
+    "palavraImpostor": "Torta"
+  },
+  {
+    "palavra": "Doce",
+    "palavraImpostor": "Salgado"
+  },
+  {
+    "palavra": "Professor",
+    "palavraImpostor": "Aluno"
+  },
+  {
+    "palavra": "Médico",
+    "palavraImpostor": "Enfermeiro"
+  },
+  {
+    "palavra": "Polícia",
+    "palavraImpostor": "Bombeiro"
+  },
+  {
+    "palavra": "Advogado",
+    "palavraImpostor": "Juiz"
+  },
+  {
+    "palavra": "Engenheiro",
+    "palavraImpostor": "Arquiteto"
+  },
+  {
+    "palavra": "Programador",
+    "palavraImpostor": "Designer"
+  },
+  {
+    "palavra": "Teclado",
+    "palavraImpostor": "Mouse"
+  },
+  {
+    "palavra": "Monitor",
+    "palavraImpostor": "Televisão"
+  },
+  {
+    "palavra": "Internet",
+    "palavraImpostor": "Wi-Fi"
+  },
+  {
+    "palavra": "Senha",
+    "palavraImpostor": "Login"
+  },
+  {
+    "palavra": "Banco",
+    "palavraImpostor": "Caixa"
+  },
+  {
+    "palavra": "Dinheiro",
+    "palavraImpostor": "Cartão"
+  },
+  {
+    "palavra": "Pix",
+    "palavraImpostor": "Transferência"
+  },
+  {
+    "palavra": "Compra",
+    "palavraImpostor": "Venda"
+  },
+  {
+    "palavra": "Promoção",
+    "palavraImpostor": "Desconto"
+  },
+  {
+    "palavra": "Loja",
+    "palavraImpostor": "Shopping"
+  },
+  {
+    "palavra": "Roupa",
+    "palavraImpostor": "Sapato"
+  },
+  {
+    "palavra": "Camisa",
+    "palavraImpostor": "Camiseta"
+  },
+  {
+    "palavra": "Calça",
+    "palavraImpostor": "Shorts"
+  },
+  {
+    "palavra": "Casaco",
+    "palavraImpostor": "Jaqueta"
+  },
+  {
+    "palavra": "Montanha",
+    "palavraImpostor": "Colina"
+  },
+  {
+    "palavra": "Rio",
+    "palavraImpostor": "Lago"
+  },
+  {
+    "palavra": "Céu",
+    "palavraImpostor": "Nuvem"
+  },
+  {
+    "palavra": "Floresta",
+    "palavraImpostor": "Selva"
+  },
+  {
+    "palavra": "Deserto",
+    "palavraImpostor": "Oásis"
+  },
+  {
+    "palavra": "Ilha",
+    "palavraImpostor": "Continente"
+  },
+  {
+    "palavra": "Mapa",
+    "palavraImpostor": "Bússola"
+  },
+  {
+    "palavra": "Estrada",
+    "palavraImpostor": "Rodovia"
+  },
+  {
+    "palavra": "Trilha",
+    "palavraImpostor": "Caminho"
+  },
+  {
+    "palavra": "Ponte",
+    "palavraImpostor": "Viaduto"
+  },
+  {
+    "palavra": "Cidade",
+    "palavraImpostor": "Vila"
+  },
+  {
+    "palavra": "Bairro",
+    "palavraImpostor": "Centro"
+  },
+  {
+    "palavra": "Prédio",
+    "palavraImpostor": "Casa"
+  },
+  {
+    "palavra": "Elevador",
+    "palavraImpostor": "Escada"
+  },
+  {
+    "palavra": "Porta",
+    "palavraImpostor": "Janela"
+  },
+  {
+    "palavra": "Chave",
+    "palavraImpostor": "Fechadura"
+  },
+  {
+    "palavra": "Lâmpada",
+    "palavraImpostor": "Lanterna"
+  },
+  {
+    "palavra": "Energia",
+    "palavraImpostor": "Bateria"
+  },
+  {
+    "palavra": "Tomada",
+    "palavraImpostor": "Extensão"
+  },
+  {
+    "palavra": "Controle",
+    "palavraImpostor": "ControleRemoto"
+  },
+  {
+    "palavra": "Jogo",
+    "palavraImpostor": "Brincadeira"
+  },
+  {
+    "palavra": "Tabuleiro",
+    "palavraImpostor": "Cartas"
+  },
+  {
+    "palavra": "Dado",
+    "palavraImpostor": "Moeda"
+  },
+  {
+    "palavra": "Peão",
+    "palavraImpostor": "Ficha"
+  },
+  {
+    "palavra": "Vitória",
+    "palavraImpostor": "Empate"
+  },
+  {
+    "palavra": "Derrota",
+    "palavraImpostor": "Erro"
+  },
+  {
+    "palavra": "Pontuação",
+    "palavraImpostor": "Ranking"
+  },
+  {
+    "palavra": "Rodada",
+    "palavraImpostor": "Turno"
+  },
+  {
+    "palavra": "Equipe",
+    "palavraImpostor": "Grupo"
+  },
+  {
+    "palavra": "Líder",
+    "palavraImpostor": "Chefe"
+  },
+  {
+    "palavra": "Amigo",
+    "palavraImpostor": "Colega"
+  },
+  {
+    "palavra": "Família",
+    "palavraImpostor": "Parente"
+  },
+  {
+    "palavra": "Festa",
+    "palavraImpostor": "Evento"
+  },
+  {
+    "palavra": "Aniversário",
+    "palavraImpostor": "Comemoração"
+  },
+  {
+    "palavra": "Presente",
+    "palavraImpostor": "Surpresa"
+  },
+  {
+    "palavra": "Convite",
+    "palavraImpostor": "Mensagem"
+  },
+  {
+    "palavra": "Risada",
+    "palavraImpostor": "Sorriso"
+  },
+  {
+    "palavra": "Briga",
+    "palavraImpostor": "Discussão"
+  },
+  {
+    "palavra": "Acordo",
+    "palavraImpostor": "Decisão"
+  },
+  {
+    "palavra": "Promessa",
+    "palavraImpostor": "Compromisso"
+  },
+  {
+    "palavra": "Tempo",
+    "palavraImpostor": "Clima"
+  },
+  {
+    "palavra": "Relâmpago",
+    "palavraImpostor": "Trovão"
+  },
+  {
+    "palavra": "Vento",
+    "palavraImpostor": "Brisa"
+  },
+  {
+    "palavra": "Tempestade",
+    "palavraImpostor": "ChuvaForte"
+  },
+  {
+    "palavra": "Manhã",
+    "palavraImpostor": "Tarde"
+  },
+  {
+    "palavra": "Noite",
+    "palavraImpostor": "Madrugada"
+  },
+  {
+    "palavra": "Calendário",
+    "palavraImpostor": "Agenda"
+  },
+  {
+    "palavra": "Feriado",
+    "palavraImpostor": "FimDeSemana"
+  },
+  {
+    "palavra": "Rotina",
+    "palavraImpostor": "Hábito"
+  },
+  {
+    "palavra": "Descanso",
+    "palavraImpostor": "Sono"
+  },
+  {
+    "palavra": "Saúde",
+    "palavraImpostor": "BemEstar"
+  },
+  {
+    "palavra": "Exercício",
+    "palavraImpostor": "Alongamento"
+  },
+  {
+    "palavra": "Corrida",
+    "palavraImpostor": "Caminhada"
+  },
+  {
+    "palavra": "Academia",
+    "palavraImpostor": "Parque"
+  },
+  {
+    "palavra": "Esporte",
+    "palavraImpostor": "Competição"
+  },
+  {
+    "palavra": "Trofeu",
+    "palavraImpostor": "Medalha"
+  },
+  {
+    "palavra": "Regra",
+    "palavraImpostor": "Lei"
+  },
+  {
+    "palavra": "Desafio",
+    "palavraImpostor": "Missão"
+  },
+  {
+    "palavra": "Objetivo",
+    "palavraImpostor": "Meta"
+  },
+  {
+    "palavra": "Resultado",
+    "palavraImpostor": "Conclusão"
+  }
+]
